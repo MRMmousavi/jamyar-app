@@ -47,7 +47,7 @@ jobs:
         working-directory: android
         run: |
           ./gradlew assembleRelease bundleRelease \
-            -Pandroid.injected.signing.store.file=jamyar-release-key.jks \
+            -Pandroid.injected.signing.store.file=$GITHUB_WORKSPACE/android/app/jamyar-release-key.jks \
             -Pandroid.injected.signing.store.password="${{ secrets.KEYSTORE_PASSWORD }}" \
             -Pandroid.injected.signing.key.alias="${{ secrets.KEY_ALIAS }}" \
             -Pandroid.injected.signing.key.password="${{ secrets.KEY_PASSWORD }}"
@@ -56,10 +56,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jamyar-release-apk
-          path: android/app/build/outputs/apk/release/*-release.apk
+          path: android/app/build/outputs/apk/release/*.apk
 
       - name: Upload Release AAB (Bundle)
         uses: actions/upload-artifact@v4
         with:
           name: jamyar-release-aab
-          path: android/app/build/outputs/bundle/release/*-release.aab
+          path: android/app/build/outputs/bundle/release/*.aab
