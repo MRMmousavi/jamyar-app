@@ -35,11 +35,10 @@ jobs:
         run: npx cap sync android
 
       - name: Decode Keystore
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/jamyar-release-key.jks
-               - name: Grant execute permission to gradlew
-           run: chmod +x android/gradlew
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/jamyar-release-key.jks
 
+      - name: Grant execute permission to gradlew
+        run: chmod +x android/gradlew
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
